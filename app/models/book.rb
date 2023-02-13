@@ -1,3 +1,19 @@
 class Book < ApplicationRecord
-  belong_to :user
+  belongs_to :user
+  has_one_attached :image
+
+  def get_image
+    if image.attached?
+      image
+    else
+      'no_image.jpg'
+    end
+  end
+
+
+
+
+
+
 end
+
