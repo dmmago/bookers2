@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
+  before_action :is_matching_login_user, only: [:edit, :update]
 
 
   def index
     @users = User.all
-    @user = User.new
+    @user = current_user
 
 
   end
