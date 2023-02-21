@@ -1,35 +1,46 @@
 <%= flash[:notice] %>
-<h1>Book detail</h1>
-<table>
-  <thaed>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th colspan="3"></th>
-    </tr>
-  </thaed>
-  <tbody>
-    <tr>
-      <td>
-        <%= link_to user_path(@user.id) do %>
-          <%= image_tag @book.user.get_profile_image(100,100) %><br>
-          <%= @user.name %>
-        <% end %>
-      </td>
-      <td>
-        <%= link_to @book.title, book_path(@book.id) %>
-      </td>
-      <td>
-        <%= @book.body %>
-      </td>
-      <% if @book.user == current_user %>
-        <td>
-          <%= link_to "Edit", edit_book_path(@book.id) %>
-        </td>
-        <td>
-          <%= link_to "Destroy", book_path(@book.id), method: :delete, "data-confirm" => "本当に消しますか？" %>
-        </td>
-      <% end %>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render 'users/userinfo', user: @user, book: @book %>
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <h1>Book detail</h1>
+      <table class="table table-hover table-inverse">
+        <thaed>
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th colspan="3"></th>
+          </tr>
+        </thaed>
+        <tbody>
+          <tr>
+            <td>
+              <%= link_to user_path(@user.id) do %>
+                <%= image_tag @book.user.get_profile_image(100,100) %><br>
+                <%= @user.name %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to @book.title, book_path(@book.id) %>
+            </td>
+            <td>
+              <%= @book.body %>
+            </td>
+            <% if @book.user == current_user %>
+              <td>
+                <%= link_to "Edit", edit_book_path(@book.id), class: "btn btn-sm btn-success" %>
+              </td>
+              <td>
+                <%= link_to "Destroy", book_path(@book.id), method: :delete, class: "btn btn-sm btn-danger", "data-confirm" => "本当に消しますか？" %>
+              </td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
-<%= render 'users/userinfo', user: @user, book: @book %>
